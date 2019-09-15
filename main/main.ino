@@ -29,13 +29,14 @@ void setup() {
  }
  
 void loop() {
-  writeWord("hello");
+  writeWord("WELCOME");
   FastLED.clear();
   FastLED.show();
   delay(1000);
 }
 
 void writeWord(String word) {
+  word.toLowerCase();
   Serial.print(F("writeWord called with "));
   Serial.println(word);
   
@@ -48,7 +49,7 @@ void writeWord(String word) {
     Serial.print(F("looping. Will turn on ")); Serial.print(letter); Serial.print(F(", index:")); Serial.println(letter_positions[(int) letter]);
     //leds[ letters[i] ] = CRGB::Red;
     fadeLED_on( letter_positions[(int) letter], 500 );
-    delay(2000);
+    delay(1500);
   }
 }
 
@@ -61,6 +62,7 @@ void fadeLED_on(int ledindex, int wait) {
 }
 
 void setupLetterPositions() {
+  // this maps ascii codes to led position on the string of addressable LEDs
   letter_positions[97]  =  0;  // a
   letter_positions[98]  =  1;  // b
   letter_positions[99]  =  2;  // c
@@ -98,4 +100,7 @@ void showReadyMessage() {
     FastLED.show();
     delay(400);
   }
+
+  FastLED.clear();
+  FastLED.show();
 }
