@@ -14,11 +14,11 @@ void setup() {
  
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   Serial.begin(115200);
-  int sanityCheck = 0;
-  while (!Serial && sanityCheck < 500) {
+  int serialSanityCheck = 0;
+  while (!Serial && serialSanityCheck < 200) {
     // wait for serial port to be ready. Add sanity check in case it never becomes ready
     delay(2);
-    sanityCheck++;
+    serialSanityCheck++;
   }
   
   Serial.print(F("Program started. Took "));
@@ -48,12 +48,12 @@ void writeWord(String word) {
     delay(200);
     Serial.print(F("looping. Will turn on ")); Serial.print(letter); Serial.print(F(", index:")); Serial.println(letter_positions[(int) letter]);
     //leds[ letters[i] ] = CRGB::Red;
-    fadeLED_on( letter_positions[(int) letter], 200 );
+    fadeLED_on( letter_positions[(int) letter]);
     delay(1500);
   }
 }
 
-void fadeLED_on(int ledindex, int wait) {
+void fadeLED_on(int ledindex) {
   for (int i=0; i < 255; i++) {
     leds[ ledindex ].red = i;
     FastLED.show();
