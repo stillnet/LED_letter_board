@@ -14,16 +14,6 @@ void setup() {
  
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   Serial.begin(115200);
-  int serialSanityCheck = 0;
-  while (!Serial && serialSanityCheck < 200) {
-    // wait for serial port to be ready. Add sanity check in case it never becomes ready
-    delay(2);
-    serialSanityCheck++;
-  }
-  
-  Serial.print(F("Program started. Took "));
-  Serial.print(sanityCheck);
-  Serial.println(F(" counts for serial port to become ready."));
 
   showReadyMessage();
  }
