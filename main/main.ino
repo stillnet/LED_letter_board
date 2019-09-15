@@ -15,7 +15,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   Serial.begin(115200);
   int sanityCheck = 0;
-  while (!Serial && sanityCheck < 1000) {
+  while (!Serial && sanityCheck < 500) {
     // wait for serial port to be ready. Add sanity check in case it never becomes ready
     delay(2);
     sanityCheck++;
@@ -48,7 +48,7 @@ void writeWord(String word) {
     delay(200);
     Serial.print(F("looping. Will turn on ")); Serial.print(letter); Serial.print(F(", index:")); Serial.println(letter_positions[(int) letter]);
     //leds[ letters[i] ] = CRGB::Red;
-    fadeLED_on( letter_positions[(int) letter], 500 );
+    fadeLED_on( letter_positions[(int) letter], 200 );
     delay(1500);
   }
 }
@@ -92,13 +92,33 @@ void setupLetterPositions() {
 }
 
 void showReadyMessage() {
+  // test all the LEDs, then spell out R-E-A-D-Y
+  for (int i=0; i<NUM_LEDS; i++) {
+    FastLED.clear();
+    leds[i].red = 150;
+    FastLED.show();
+    delay(15);
+  }
+  for (int i=NUM_LEDS; i>=0; i--) {
+    FastLED.clear();
+    leds[i].green = 150;
+    FastLED.show();
+    delay(15);
+  }
+  for (int i=0; i<NUM_LEDS; i++) {
+    FastLED.clear();
+    leds[i].blue = 150;
+    FastLED.show();
+    delay(15);
+  }
+  
   char msg[] = {'r', 'e', 'a', 'd', 'y'};
   for (int i=0; i<5; i++) {
     FastLED.clear();
     FastLED.show();
     leds[ letter_positions[(int) msg[i]] ].green = 150;
     FastLED.show();
-    delay(400);
+    delay(300);
   }
 
   FastLED.clear();
