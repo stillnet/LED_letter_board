@@ -2,15 +2,25 @@
  
 #define DATA_PIN 6
 #define NUM_LEDS 30
+
+// brightness can be 1 to 255
+#define BRIGHTNESS 100
  
 CRGB leds[NUM_LEDS];
 
 // could make this array smaller by storing an offset and only indexing up to 25.
 int letter_positions[122];
 
+CHSV mycolors[4];
+
 void setup() { 
   // map letters to LEDs in the string of LEDs
   setupLetterPositions();
+
+  mycolors[0] = CHSV( 160, 200, 10);  // pale blue
+  mycolors[1] = CHSV( 42,  255, 10);  // yellow
+  mycolors[2] = CHSV( 0,   200, 10);  // red
+  mycolors[3] = CHSV( 85,   200, 10);  // green
  
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   Serial.begin(115200);
@@ -38,8 +48,21 @@ void writeWord(String word) {
     delay(200);
     Serial.print(F("looping. Will turn on ")); Serial.print(letter); Serial.print(F(", index:")); Serial.println(letter_positions[(int) letter]);
     //leds[ letters[i] ] = CRGB::Red;
-    fadeLED_on( letter_positions[(int) letter]);
+    //fadeLED_on( letter_positions[(int) letter]);
+    turnLED_on( letter_positions[(int) letter]);
     delay(1500);
+  }
+}
+
+void turnLED_on(int ledindex) {
+  CHSV thisColor = mycolors[random(0,4)];
+  leds[ ledindex ] = thisColor;
+
+  for (int i=0; i < 255; i = i + 5) {
+    thisColor.value = i;
+    leds[ ledindex ] = thisColor;
+    FastLED.show();
+    //delay(1);
   }
 }
 
