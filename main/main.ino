@@ -32,7 +32,7 @@ void setup() {
  }
  
 void loop() {
-  writeWord("WELCOME");
+  writeWord("really long sentence here");
   FastLED.clear();
   FastLED.show();
   delay(1000);
@@ -40,18 +40,32 @@ void loop() {
 
 void writeWord(String word) {
   word.toLowerCase();
-  Serial.print(F("writeWord called with "));
+  Serial.print(F("Hello There"));
   Serial.println(word);
   
   lcd.clear();
-  lcd.print(word);
   
   for (int i=0; i < word.length(); i++) {
+    int lcdCursorPosition = i;
     char letter = word.charAt(i);
+
+    lcd.clear();
+    lcd.print("Working...");
+    // don't scroll off the screen. Just continue to use the last position for long strings
+    if (lcdCursorPosition > 15 ) { lcdCursorPosition = 15; } 
+    lcd.setCursor(lcdCursorPosition,2);
+    lcd.print(letter);
+    
     FastLED.clear();
     FastLED.show();
     // need to pause for a short time so that words with double letters appear to have some space in between them
     delay(200);
+
+    // if this is a space or another character we don't recognize, just continue
+    if ( (int) letter < 97 || (int) letter > 122) {
+      continue;
+    }
+    
     Serial.print(F("looping. Will turn on ")); Serial.print(letter); Serial.print(F(", index:")); Serial.println(letter_positions[(int) letter]);
     //leds[ letters[i] ] = CRGB::Red;
     //fadeLED_on( letter_positions[(int) letter]);
@@ -111,7 +125,7 @@ void setupLetterPositions() {
 }
 
 void showReadyMessage() {
-  lcd.print("R E A D Y");
+  lcd.print("Starting up...");
   
   // test all the LEDs, then spell out R-E-A-D-Y
   for (int i=0; i<NUM_LEDS; i++) {
