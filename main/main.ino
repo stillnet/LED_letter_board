@@ -1,10 +1,10 @@
 #include <FastLED.h>
+#include <LiquidCrystal.h>
  
-#define DATA_PIN 6
+#define DATA_PIN 8
 #define NUM_LEDS 30
 
-// brightness can be 1 to 255
-#define BRIGHTNESS 100
+LiquidCrystal lcd(1, 2, 4, 5, 6, 7); // Creates an LC object. Parameters: (rs, enable, d4, d5, d6, d7) 
  
 CRGB leds[NUM_LEDS];
 
@@ -16,6 +16,9 @@ CHSV mycolors[4];
 void setup() { 
   // map letters to LEDs in the string of LEDs
   setupLetterPositions();
+
+  // setup the LCD screen with two rows of 16 characters
+  lcd.begin(16,2);
 
   mycolors[0] = CHSV( 160, 200, 10);  // pale blue
   mycolors[1] = CHSV( 42,  255, 10);  // yellow
@@ -39,6 +42,9 @@ void writeWord(String word) {
   word.toLowerCase();
   Serial.print(F("writeWord called with "));
   Serial.println(word);
+  
+  lcd.clear();
+  lcd.print(word);
   
   for (int i=0; i < word.length(); i++) {
     char letter = word.charAt(i);
@@ -105,6 +111,8 @@ void setupLetterPositions() {
 }
 
 void showReadyMessage() {
+  lcd.print("R E A D Y");
+  
   // test all the LEDs, then spell out R-E-A-D-Y
   for (int i=0; i<NUM_LEDS; i++) {
     FastLED.clear();
@@ -136,4 +144,6 @@ void showReadyMessage() {
 
   FastLED.clear();
   FastLED.show();
+
+  lcd.clear();
 }
