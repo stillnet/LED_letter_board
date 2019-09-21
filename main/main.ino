@@ -32,9 +32,10 @@ void setup() {
  }
  
 void loop() {
-  writeWord("really long sentence here");
+  writeWord("hello there");
   FastLED.clear();
   FastLED.show();
+  lcd.clear();
   delay(1000);
 }
 
@@ -50,7 +51,7 @@ void writeWord(String word) {
     char letter = word.charAt(i);
 
     lcd.clear();
-    lcd.print("Working...");
+    lcd.print("Lighting LEDs...");
     // don't scroll off the screen. Just continue to use the last position for long strings
     if (lcdCursorPosition > 15 ) { lcdCursorPosition = 15; } 
     lcd.setCursor(lcdCursorPosition,2);
