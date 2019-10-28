@@ -32,7 +32,7 @@ void setup() {
  }
  
 void loop() {
-  writeWord("hello there");
+  writeWord("happy halloween run away in fear");
   FastLED.clear();
   FastLED.show();
   lcd.clear();
@@ -97,32 +97,32 @@ void fadeLED_on(int ledindex) {
 
 void setupLetterPositions() {
   // this maps ascii codes to led position on the string of addressable LEDs
-  letter_positions[97]  =  0;  // a
-  letter_positions[98]  =  1;  // b
-  letter_positions[99]  =  2;  // c
-  letter_positions[100] =  3;  // d
-  letter_positions[101] =  4;  // e
-  letter_positions[102] =  5;  // f
-  letter_positions[103] =  6;  // g
-  letter_positions[104] =  7;  // h
-  letter_positions[105] =  8;  // i
-  letter_positions[106] =  9;  // j
-  letter_positions[107] = 10;  // k
-  letter_positions[108] = 11;  // l
-  letter_positions[109] = 12;  // m
-  letter_positions[110] = 13;  // n
-  letter_positions[111] = 14;  // o
-  letter_positions[112] = 15;  // p
-  letter_positions[113] = 16;  // q
-  letter_positions[114] = 17;  // r
-  letter_positions[115] = 18;  // s
-  letter_positions[116] = 19;  // t
-  letter_positions[117] = 20;  // u
-  letter_positions[118] = 21;  // v
-  letter_positions[119] = 22;  // w
-  letter_positions[120] = 23;  // x
-  letter_positions[121] = 24;  // y
-  letter_positions[122] = 25;  // z
+  letter_positions[97]  = 39;  // a
+  letter_positions[98]  = 41;  // b
+  letter_positions[99]  = 42;  // c
+  letter_positions[100] = 43;  // d
+  letter_positions[101] = 45;  // e
+  letter_positions[102] = 46;  // f
+  letter_positions[103] = 47;  // g
+  letter_positions[104] = 49;  // h
+  letter_positions[105] = 33;  // i
+  letter_positions[106] = 31;  // j
+  letter_positions[107] = 29;  // k
+  letter_positions[108] = 28;  // l
+  letter_positions[109] = 26;  // m
+  letter_positions[110] = 24;  // n
+  letter_positions[111] = 22;  // o
+  letter_positions[112] = 21;  // p
+  letter_positions[113] = 19;  // q
+  letter_positions[114] = 2;  // r
+  letter_positions[115] = 3;  // s
+  letter_positions[116] = 5;  // t
+  letter_positions[117] = 6;  // u
+  letter_positions[118] = 8;  // v
+  letter_positions[119] = 9;  // w
+  letter_positions[120] = 11;  // x
+  letter_positions[121] = 13;  // y
+  letter_positions[122] = 14;  // z
 }
 
 void showReadyMessage() {
@@ -161,4 +161,34 @@ void showReadyMessage() {
   FastLED.show();
 
   lcd.clear();
+}
+
+void setupLetterPositionsTest() {
+  // this maps ascii codes to led position on the string of addressable LEDs
+  letter_positions[97]  =  0;  // a
+  letter_positions[98]  =  1;  // b
+  letter_positions[99]  =  2;  // c
+  letter_positions[100] =  3;  // d
+  letter_positions[101] =  4;  // e
+  letter_positions[102] =  5;  // f
+  letter_positions[103] =  6;  // g
+  letter_positions[104] =  7;  // h
+  letter_positions[105] =  8;  // i
+  letter_positions[106] =  9;  // j
+  letter_positions[107] = 10;  // k
+  letter_positions[108] = 11;  // l
+  letter_positions[109] = 12;  // m
+  letter_positions[110] = 13;  // n
+  letter_positions[111] = 14;  // o
+  letter_positions[112] = 15;  // p
+  letter_positions[113] = 16;  // q
+  letter_positions[114] = 17;  // r
+  letter_positions[115] = 18;  // s
+  letter_positions[116] = 19;  // t
+  letter_positions[117] = 20;  // u
+  letter_positions[118] = 21;  // v
+  letter_positions[119] = 22;  // w
+  letter_positions[120] = 23;  // x
+  letter_positions[121] = 24;  // y
+  letter_positions[122] = 25;  // z
 }
